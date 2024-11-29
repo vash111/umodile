@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -168,200 +170,49 @@
          </ul>
          <div class="listWrap" id="listWrap-class">
             <ul class="card-group">
+            
+            
+            
+           	<!-- 상품리스트 시작 -->
+           <c:forEach items="${products}" var="product">
               <li>
-                <a href="/phone/PhoneDetail"> 
+                <a class="move" href="/phone/PhoneDetail?cno=${product.cno}"> 
                    <div class="chip-wrap">
-                      <img src="${pageContext.request.contextPath}/resources/img/rkrtjdql.png" alt="">
-                      <img src="${pageContext.request.contextPath}/resources/img/gkfdls.png" alt="">
+                      <%-- <img src="${pageContext.request.contextPath}/resources/img/rkrtjdql.png" alt=""> --%>
+                      <%-- <img src="${pageContext.request.contextPath}/resources/img/gkfdls.png" alt=""> --%>
                    </div>
                    <div class="phone-img">
-                      <img src="${pageContext.request.contextPath}/resources/img/A24_10.png">
+                      <img src="${pageContext.request.contextPath}/resources/phoneImg/${product.cno}.png">
                    </div>
                    <div class="phone-cont">
                       <div class="phone-cont-top">
                          <h3 class="main-txt">
                            <span class="chip">
-                              <img src="${pageContext.request.contextPath}/resources/img/chip-lte.png">
+                              <img src="${pageContext.request.contextPath}/resources/img/chip-lte.png"> 
                            </span>
-                           삼성 갤럭시 A24
+                        	${product.phone_Name}
                          </h3>
-                         <p>LTE (1.5GB/통화기본)</p>
-                         <p>통신요금 25,900원+할부금 0원</p>
+                         <p>${product.description1}</p>
+                         <p>${product.description2}</p>
                          
                       </div>
                         <div class="phone-cont-bottom">
                             <p class="normal-txt">
                               월 납부금액
                               <strong class="txt-vt">
-                                 <span class="dc-prc">25,500원</span>
-                                 19,300원
+                                ${product.price}
                               </strong>
                             </p>
                          </div>   
                    </div>
                 </a>  
               </li>
-              <li>
-                <a href="#"> 
-                   <div class="chip-wrap">
-                      <img src="${pageContext.request.contextPath}/resources/img/dlsrl.png" alt="">
-                   </div>
-                   <div class="phone-img">
-                      <img src="${pageContext.request.contextPath}/resources/img/A35 front.png">
-                   </div>
-                   <div class="phone-cont">
-                      <div class="phone-cont-top">
-                         <h3 class="main-txt">
-                           <span class="chip">
-                              <img src="${pageContext.request.contextPath}/resources/img/chip-5g.png">
-                           </span>
-                           삼성 갤럭시 A35
-				      
-                         </h3>
-                         <p>5G (5GB/3000분)</p>
-                         <p>통신요금 25,400원+할부금 0원</p>
-                         
-                      </div>
-                        <div class="phone-cont-bottom">
-                            <p class="normal-txt">
-                              월 납부금액
-                              <strong class="txt-vt">
-                                 25,400원
-                              </strong>
-                            </p>
-                         </div>   
-                   </div>
-                </a>  
-              </li>
-                 <li>
-                <a href="#"> 
-                   <div class="chip-wrap">
-                      <img src="${pageContext.request.contextPath}/resources/img/신규(6).png" alt="">
-                     <img src="${pageContext.request.contextPath}/resources/img/플래그쉽(2).png" alt="">
-                     <img src="${pageContext.request.contextPath}/resources/img/chip-slevel.png" alt="">
-                   </div>
-                   <div class="phone-img">
-                      <img src="${pageContext.request.contextPath}/resources/img/036-galaxy-zflip5.png">
-                   </div>
-                   <div class="phone-cont">
-                      <div class="phone-cont-top">
-                         <h3 class="main-txt">
-                           <span class="chip">
-                              <img src="${pageContext.request.contextPath}/resources/img/chip-5g.png">
-                           </span style="pont-size:10px;">
-                           (미개통) 갤럭시 Z플립5
-                         </h3>
-                         <p>5G (5GB/3000분)</p>
-                         <p>통신요금 25,400원+할부금 0원</p>
-                         
-                      </div>
-                        <div class="phone-cont-bottom">
-                            <p class="normal-txt">
-                              월 납부금액
-                              <strong class="txt-vt">
-                                 36,610원
-                              </strong>
-                            </p>
-                         </div>   
-                   </div>
-                </a>  
-              </li>
-               <li>
-                <a href="#"> 
-                   <div class="chip-wrap">
-                      <img src="${pageContext.request.contextPath}/resources/img/P_공시강화.png" alt="">
-                     <img src="${pageContext.request.contextPath}/resources/img/추가 상품권.png" alt="">
-                   </div>
-                   <div class="phone-img">
-                      <img src="${pageContext.request.contextPath}/resources/img/redmi note 13.png">
-                   </div>
-                   <div class="phone-cont">
-                      <div class="phone-cont-top">
-                         <h3 class="main-txt">
-                           <span class="chip">
-                              <img src="${pageContext.request.contextPath}/resources/img/chip-lte.png">
-                           </span style="pont-size:10px;">
-                           Redmi Note 13 256G
-                         </h3>
-                         <p>LTE (2GB/120분)</p>
-                         <p>통신요금 19,000원+할부금 0원</p>
-                         
-                      </div>
-                        <div class="phone-cont-bottom">
-                            <p class="normal-txt">
-                              월 납부금액
-                              <strong class="txt-vt">
-                                 19,000원
-                              </strong>
-                            </p>
-                         </div>   
-                   </div>
-                </a>  
-              </li>
-              <li>
-                <a href="#"> 
-                   <div class="chip-wrap">
-                      <img src="${pageContext.request.contextPath}/resources/img/P_공시강화.png" alt="">
-                     <img src="${pageContext.request.contextPath}/resources/img/추가 상품권.png" alt="">
-                   </div>
-                   <div class="phone-img">
-                      <img src="${pageContext.request.contextPath}/resources/img/003_galaxynote10_product.png">
-                   </div>
-                   <div class="phone-cont">
-                      <div class="phone-cont-top">
-                         <h3 class="main-txt">
-                           <span class="chip">
-                              <img src="${pageContext.request.contextPath}/resources/img/chip-5g.png">
-                           </span style="pont-size:10px;">
-                           Redmi Note 13 256G
-                         </h3>
-                         <p>LTE (2GB/120분)</p>
-                         <p>통신요금 19,000원+할부금 0원</p>
-                         
-                      </div>
-                        <div class="phone-cont-bottom">
-                            <p class="normal-txt">
-                              월 납부금액
-                              <strong class="txt-vt">
-                                 19,000원
-                              </strong>
-                            </p>
-                         </div>   
-                   </div>
-                </a>  
-              </li>
-              <li>
-                <a href="#"> 
-                   <div class="chip-wrap">
-                      <img src="${pageContext.request.contextPath}/resources/img/P_공시강화.png" alt="">
-                     <img src="${pageContext.request.contextPath}/resources/img/새제품.png" alt="">
-                   </div>
-                   <div class="phone-img">
-                      <img src="${pageContext.request.contextPath}/resources/img/002_galaxy_s23plus.png">
-                   </div>
-                   <div class="phone-cont">
-                      <div class="phone-cont-top">
-                         <h3 class="main-txt">
-                           <span class="chip">
-                              <img src="${pageContext.request.contextPath}/resources/img/chip-5g.png">
-                           </span style="pont-size:10px;">
-                           갤럭시 S23+ 256G
-                         </h3>
-                         <p>5G (5GB/200분)</p>
-                         <p>통신요금 23,500원+할부금 25,520원</p>
-                         
-                      </div>
-                        <div class="phone-cont-bottom">
-                            <p class="normal-txt">
-                              월 납부금액
-                              <strong class="txt-vt">
-                                 19,000원
-                              </strong>
-                            </p>
-                         </div>   
-                   </div>
-                </a>  
-              </li>
+              
+              </c:forEach>
+              
+              
+              <!-- 샘플5개 잘라내기부분 -->
+
             </ul>
          </div>
     </div>
@@ -369,10 +220,20 @@
  
 
  
- <%@ include file="../includes/mainfooter.jsp"%> 
+<%-- <%@ include file="../includes/mainfooter.jsp"%> --%>
+
+  	<!-- URL 파라미터로 전달된 loginMessage 확인 후 알림창 띄우기 -->
+	<c:if test="${param.msg == 'success'}">
+		<script>
+			alert('휴대폰 가입 신청이 완료되었습니다.');
+		</script>
+	</c:if>
 </body>
 </html>
 <script>
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
     var i = 0;
     var slideCount = 1; 
@@ -438,6 +299,6 @@ document.querySelectorAll('.ico-check').forEach((element) => {
 
 /* 선택 시 보라색 변경 끝 */
 
-
+		
 
 </script>

@@ -1,16 +1,11 @@
 package org.zerock.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import lombok.extern.log4j.Log4j;
 
@@ -22,6 +17,15 @@ public class HomeController {
 	public String index(Model model) {
 		
 		return "index";
+	}
+	
+	@GetMapping("/logout")
+	public String adminLogout(HttpSession session, HttpServletRequest request) {
+
+
+		session.invalidate(); // 세션 무효화
+		
+		return "redirect:/";
 	}
 	
 
