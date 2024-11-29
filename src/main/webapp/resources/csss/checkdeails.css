@@ -264,6 +264,7 @@ section.notice {
 .board-table tbody th {
   padding-left: 28px;
   padding-right: 14px;
+  width: 200px;
   border-top: 1px solid #e7e7e7;
   text-align: left;
 }

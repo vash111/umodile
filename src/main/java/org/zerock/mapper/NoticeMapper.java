@@ -29,6 +29,10 @@ public interface NoticeMapper {
 	// 검색 기능 추가
     List<NoticeVO> searchPosts(@Param("keyword") String keyword, @Param("offset") int offset, @Param("limit") int limit);
 
+	int countSearchPosts(String keyword);
+
+	int countAllPosts();
+	
 	int getTotalCount();
 
 }

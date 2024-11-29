@@ -14,4 +14,6 @@ public class OrderVO {
 	private String installment; // 할부
 	private Date regDate; // 구매 일자
 	private double vatPrice; // 결제 금액(부가세포함)
+	private String phone_Name; //폰 이름
+	private String giga; //용량
 }

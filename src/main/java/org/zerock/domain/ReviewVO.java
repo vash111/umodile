@@ -5,12 +5,11 @@ import lombok.Data;
 
 @Data
 public class ReviewVO {
-
-    private Long rno;               
-    private Long vno;               
-    private Long uno;               
-    private String title;           
-    private String content;         
-    private LocalDateTime regdate;  
-    private LocalDateTime updatedate; 
+    private Long rno;                // 리뷰 번호
+    private Long vno;                // 휴대폰 구매 번호 (외래키)
+    private Long uno;                // 사용자 번호 (외래키)
+    private String title;            // 리뷰 제목
+    private String content;          // 리뷰 내용
+    private LocalDateTime regdate;   // 리뷰 작성일
+    private LocalDateTime updatedate;// 리뷰 수정일
 }

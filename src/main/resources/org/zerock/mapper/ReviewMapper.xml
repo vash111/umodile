@@ -2,59 +2,19 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="org.zerock.mapper.ReviewMapper">
 
-    <!-- 구매 고객(vno) 검증 -->
-    <select id="checkUserHasVno" resultType="int">
-        SELECT COUNT(*)
-        FROM PHONEADD
-        WHERE VNO = #{vno} AND UNO = #{uno}
+    <insert id="insertReview" parameterType="org.zerock.domain.ReviewVO">
+        INSERT INTO REVIEW (RNO, VNO, UNO, TITLE, CONTENT, REGDATE, UPDATEDATE)
+        VALUES (SEQ_REVIEWS.NEXTVAL, #{vno}, #{uno}, #{title}, #{content}, SYSDATE, SYSDATE)
+    </insert>
+
+    <select id="getReviewById" parameterType="long" resultType="org.zerock.domain.ReviewVO">
+        SELECT * FROM REVIEW WHERE RNO = #{rno}
     </select>
 
-    <!-- 리뷰 등록 -->
-	<insert id="create">
-	    INSERT INTO review (rno, title, content, uno, vno, regdate)
-	    VALUES (SEQ_REVIEW.NEXTVAL, #{title}, #{content}, #{uno}, #{vno}, SYSTIMESTAMP)
-	</insert>
-
-
-    <!-- 리뷰 조회 -->
-    <select id="read" resultType="org.zerock.domain.ReviewVO">
-        SELECT * 
-        FROM review 
-        WHERE rno = #{rno}
+    <select id="getAllReviews" resultType="org.zerock.domain.ReviewVO">
+        SELECT * FROM REVIEW ORDER BY REGDATE DESC
     </select>
-
-    <!-- 리뷰 수정 -->
-    <update id="update">
-        UPDATE review
-        SET title = #{title}, 
-            content = #{content}, 
-            updatedate = SYSTIMESTAMP
-        WHERE rno = #{rno}
-    </update>
-
-    <!-- 리뷰 삭제 -->
-    <delete id="delete">
-        DELETE FROM review WHERE rno = #{rno}
-    </delete>
-
-    <!-- 검색 기능 -->
-    <select id="searchPosts" resultType="org.zerock.domain.ReviewVO">
-        SELECT * 
-        FROM review
-        WHERE title LIKE CONCAT('%', #{keyword}, '%')
-           OR content LIKE CONCAT('%', #{keyword}, '%')
-        ORDER BY regdate DESC
-        OFFSET #{offset} ROWS FETCH NEXT #{limit} ROWS ONLY
-    </select>
-
-    <!-- 리뷰 목록 (페이징 처리) -->
-    <select id="getAllWithPaging" resultType="org.zerock.domain.ReviewVO">
-        SELECT * 
-        FROM review
-        ORDER BY regdate DESC
-        OFFSET #{offset} ROWS FETCH NEXT #{limit} ROWS ONLY
-    </select>
-
 </mapper>

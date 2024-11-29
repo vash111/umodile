@@ -119,7 +119,6 @@ body {
   cursor:pointer;
   transition: 0.4s;
   display:inline;
-  cursor: pointer;
 }
 
 .btn:hover {

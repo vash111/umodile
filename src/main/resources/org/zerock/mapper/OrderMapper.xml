@@ -11,5 +11,13 @@
 		values(SEQ_PHONEADD.nextval, #{uno}, #{cno}, #{color} , #{installment}, #{vatPrice})
  	</insert>
  	
-	
+ <!-- 한 사람의 주문내역 조회 (상품 신청 내역) -->
+   <select id="orderRead" resultType="org.zerock.domain.OrderVO">
+      select a.UNO, a.VNO, a.CNO, b.phone_name , b.giga , a.COLOR,
+      a.INSTALLMENT , a.VATPRICE , a.REGDATE
+      from phoneadd a join phonepro b on a.cno = b.cno
+      where a.uno = #{uno}
+   </select>
+   
+   
 </mapper>

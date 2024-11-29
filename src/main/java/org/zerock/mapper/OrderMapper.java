@@ -14,5 +14,5 @@ public interface OrderMapper {
 
 	// 모든 주문내역 조회 (관리자 페이지)
 	public List<OrderVO> orderList();
-
+	
 }

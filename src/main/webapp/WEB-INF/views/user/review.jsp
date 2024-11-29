@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${path}/resources/csss/index.css" rel="stylesheet"/>
+<link href="${path}/resources/csss/subindex.css" rel="stylesheet"/> 
 <link href="${path}/resources/csss/reviewPage.css" rel="stylesheet"/>
 </head>
 <body>
@@ -19,21 +19,23 @@
              <div class="main-txt-group">
                 <h2 class="main-txt">리뷰 를 작성해주세요</h2>
              </div>
-             <form action="" method="">
+             <form action="/review/create" method="post">
+             <input type="hidden" name="vno" value="${vno}">
              <div id="divid" class="box-input">
                 <div class="input-wrap">
                    <input id="title" type="text" name="title" placeholder="리뷰 제목을 입력해주세요" class="input-default is-delete" title="title">
                 </div>
                 <div class="input-wrap">
-                   <input id="content" type="content" name="password" placeholder="리뷰 를 작성해주세요" class="input-default is-delete" title="content">
+                   <input id="content" type="content" name="content" placeholder="리뷰 를 작성해주세요" class="input-default is-delete" title="content">
                 </div>
              </div>
+             <button class="btns wid md-ripples ripples-light" type="submit" onclick="">리뷰작성 완료</button>
               </form>
-             <button class="btns wid md-ripples ripples-light" type="button" onclick="">리뷰작성 완료</button>
+             
              
              </div>
          </div>
      </div>
-  <%@ include file="../includes/mainfooter.jsp"%>        
+<%@ include file="../includes/subfooter.jsp"%>       
 </body>
 </html>

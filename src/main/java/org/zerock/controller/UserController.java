@@ -1,6 +1,9 @@
 package org.zerock.controller;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,12 +16,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.domain.NoticeVO;
+import org.zerock.domain.OrderVO;
+import org.zerock.domain.ReviewVO;
 import org.zerock.domain.UserVO;
+import org.zerock.service.NoticeService;
+import org.zerock.service.OrderService;
+import org.zerock.service.ReviewService;
 import org.zerock.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -31,8 +42,84 @@ import oracle.jdbc.proxy.annotation.Post;
 public class UserController {
 
 	private final UserService service;
-
+	
+	private final NoticeService noticeService;
+	
+	private final ReviewService reviewService;
+	
+	private final UserService userService;
+	
+	private final OrderService orderService;
+	
+	
 	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	
+	
+	@GetMapping("/checkdetails")
+	public void checkDetails(HttpServletRequest request, HttpSession session, Model model) {
+
+		UserVO user = (UserVO) request.getSession().getAttribute("user");
+		Long uno = user.getUno();
+
+		List<OrderVO> orderList = orderService.orderRead(uno);
+		model.addAttribute("orderList" , orderList);
+	}
+	
+	// 유저 공지 리스트
+	@GetMapping("/notice")
+	public String userNotice(
+	        @RequestParam(defaultValue = "1") int page, // 기본값 1페이지
+	        Model model) {
+	    int limit = 10; // 한 페이지에 보여줄 게시물 수
+	    int offset = (page - 1) * limit; // 시작점 계산
+
+	    // 공지사항 목록 가져오기
+	    List<NoticeVO> noticeList = noticeService.getAllWithPaging(offset, limit);
+	    // 전체 공지사항 개수 가져오기
+	    int totalResults = noticeService.countAllPosts();
+	    // 전체 페이지 계산
+	    int totalPages = (int) Math.ceil((double) totalResults / limit);
+
+	    // 모델에 데이터 추가
+	    model.addAttribute("noticeList", noticeList); // 공지사항 목록
+	    model.addAttribute("currentPage", page); // 현재 페이지
+	    model.addAttribute("totalPages", totalPages); // 전체 페이지 수
+
+	    return "user/notice";
+	}
+	
+	// 유저 공지사항 검색 + 페이징 처리
+	@GetMapping("/notice/search")
+	public String search(@RequestParam("keyword") String keyword,
+	                     @RequestParam(defaultValue = "1") int page,
+	                     Model model) {
+	    int limit = 10; // 한 페이지에 표시할 공지사항 수
+	    int offset = (page - 1) * limit; // 시작 데이터
+
+	    // 검색된 공지사항 목록 가져오기
+	    List<NoticeVO> searchResults = noticeService.searchPosts(keyword, offset, limit);
+
+	    // 총 검색 결과 개수 가져오기
+	    int totalResults = noticeService.countSearchPosts(keyword);
+	    int totalPages = (int) Math.ceil((double) totalResults / limit); // 총 페이지 수 계산
+
+	    model.addAttribute("noticeList", searchResults); // 검색 결과
+	    model.addAttribute("currentPage", page); // 현재 페이지
+	    model.addAttribute("totalPages", totalPages); // 전체 페이지 수
+	    model.addAttribute("keyword", keyword); // 검색어 유지
+
+	    return "user/notice";
+	}
+
+	// 유저 공지사항 상세 보기 (숫자 ID만 허용)
+	@GetMapping("/notice/{nno:\\d+}")
+	public String readNotice(@PathVariable Long nno, Model model) {
+	    NoticeVO notice = noticeService.read(nno);
+	    model.addAttribute("notice", notice);
+	    return "user/read";
+	}
+	
+	///////////////////////////////////////////////////////////////////////
 
 	// 회원가입 진입
 	@GetMapping("/join")
@@ -107,9 +194,6 @@ public class UserController {
 		
 		return "user/Edit";
 	}
-	
-	
-
 
 	// 회원수정 post처리
 	@PostMapping("/update")
@@ -168,5 +252,39 @@ public class UserController {
 
 		return "redirect:/";
 	}
+	
+	////////////////////////////////////////////////////////////////////////////
+	
+	@GetMapping("/review")
+	public String reviewFage() {
+		
+		return "user/review";
+	}
+	
+	@PostMapping("/reviews/create")
+	public String createReview(@RequestParam(required = false) Long uno,
+	                           @RequestParam(required = false) Long vno,
+	                           @RequestParam String title,
+	                           @RequestParam String content,
+	                           Model model) {
+	    if (uno == null || vno == null) {
+	        model.addAttribute("error", "사용자 정보 또는 제품 번호가 누락되었습니다.");
+	        return "error";
+	    }
 
+	    // 리뷰 생성
+	    ReviewVO review = new ReviewVO();
+	    review.setUno(uno);
+	    review.setVno(vno);
+	    review.setTitle(title);
+	    review.setContent(content);
+
+	    reviewService.create(review);
+	    model.addAttribute("message", "리뷰가 성공적으로 저장되었습니다.");
+	    return "redirect:/user/review";
+	}
+
+
+	
+	
 }

@@ -6,28 +6,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.zerock.domain.OrderVO;
 import org.zerock.domain.ProductVO;
+import org.zerock.service.NoticeService;
 import org.zerock.service.OrderService;
 import org.zerock.service.ProductService;
+import org.zerock.service.ReviewService;
+import org.zerock.service.UserService;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Controller
 @RequestMapping("/phone/*")
+@RequiredArgsConstructor
 public class PhoneController {
 	
 	private final ProductService productService;
 	private final OrderService orderService;
-	
-	@Autowired
-	public PhoneController(ProductService productService,OrderService orderService) {
-		this.productService = productService;
-		this.orderService  = orderService;
-	}
+	private final ReviewService reviewService;
 	
 	@GetMapping("/phoneproduct") 
     public void phoneProductPage(Model model) {
@@ -46,7 +47,7 @@ public class PhoneController {
     	model.addAttribute("product", product);
     }
     
-    @PostMapping("/add")
+    @PostMapping("/phone/add")
     public String phoneAdd(
     		@RequestParam("uno") long uno,
     		@RequestParam("cno") long cno,
@@ -77,7 +78,10 @@ public class PhoneController {
     	return "user/login";
     }
 	
-	//1대 1비교
+    //////////////////////////////////////////////////////////////////////
+    
+    
+	//상품 1대 1비교
     @GetMapping("/comparison")
     public String phoneComparison(Model model) {
 

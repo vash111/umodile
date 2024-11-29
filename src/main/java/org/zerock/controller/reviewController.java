@@ -1,40 +1,37 @@
 package org.zerock.controller;
 
-import java.util.List;
+import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.domain.NoticeVO;
 import org.zerock.domain.ReviewVO;
+import org.zerock.domain.UserVO;
 import org.zerock.service.ReviewService;
 
-import lombok.extern.log4j.Log4j;
+import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/user")
-public class reviewController {
+@RequestMapping("/review")
+@RequiredArgsConstructor
+public class ReviewController {
 
-	private final ReviewService reviewService;
-	
-	@Autowired
-	public reviewController(ReviewService reviewService) {
-		this.reviewService = reviewService;
-	}
-	
-	@GetMapping("/review")
-	public String reviewList(Model model) {
-		List<ReviewVO> reviewList = reviewService.getAllWithPaging(0, 10);
-		model.addAttribute("reviewList",reviewList);
-		return "user/review";
-	}
-	
-	@GetMapping("/reviews")
-    public String getReviews(Model model) {
-        List<ReviewVO> reviewList = reviewService.getAllWithPaging(0,10);
-        
-        model.addAttribute("reviewList", reviewList);
-        return "reviews";
+    private final ReviewService reviewService;
+    
+    
+    @GetMapping("/create")
+    public String createForm(Model model) {
+        model.addAttribute("review", new ReviewVO()); 
+        return "review/create"; 
     }
+    
+    @PostMapping("/create")
+    public String create(ReviewVO review) {
+    	reviewService.create(review);
+        return "redirect:/";
+    }
+    
+ 
 }
