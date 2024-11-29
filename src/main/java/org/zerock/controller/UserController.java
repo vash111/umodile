@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2e99289055616f7091675884d76c17130fcb1f9d
 package org.zerock.controller;
 
 import java.time.LocalDate;
@@ -256,6 +259,37 @@ public class UserController {
 	
 	////////////////////////////////////////////////////////////////////////////
 	
+<<<<<<< HEAD
+=======
+	@GetMapping("/review")
+	public String reviewFage() {
+		
+		return "user/review";
+	}
+	
+	@PostMapping("/reviews/create")
+	public String createReview(@RequestParam(required = false) Long uno,
+	                           @RequestParam(required = false) Long vno,
+	                           @RequestParam String title,
+	                           @RequestParam String content,
+	                           Model model) {
+	    if (uno == null || vno == null) {
+	        model.addAttribute("error", "사용자 정보 또는 제품 번호가 누락되었습니다.");
+	        return "error";
+	    }
+
+	    // 리뷰 생성
+	    ReviewVO review = new ReviewVO();
+	    review.setUno(uno);
+	    review.setVno(vno);
+	    review.setTitle(title);
+	    review.setContent(content);
+
+	    reviewService.create(review);
+	    model.addAttribute("message", "리뷰가 성공적으로 저장되었습니다.");
+	    return "redirect:/user/review";
+	}
+>>>>>>> 2e99289055616f7091675884d76c17130fcb1f9d
 
 
 	

@@ -12,10 +12,13 @@ public class ReviewVO {
     private String content;          // 리뷰 내용
     private LocalDateTime regdate;   // 리뷰 작성일
     private LocalDateTime updatedate;// 리뷰 수정일
+<<<<<<< HEAD
 
     // 사용자 이름 (user 테이블 조인)
     private String userName;
 
     // 휴대폰 상세 정보 (ProductVo 조인)
     private ProductVO phoneDetails;
+=======
+>>>>>>> 2e99289055616f7091675884d76c17130fcb1f9d
 }

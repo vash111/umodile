@@ -38,6 +38,18 @@ public class PhoneController {
 		
     }
   
+<<<<<<< HEAD
+=======
+    
+    @GetMapping("/PhoneDetail") 
+    public void phoneProductDetail(@RequestParam("cno") Long cno, Model model) {
+        
+    	ProductVO product = productService.read(cno);
+    	
+    	model.addAttribute("product", product);
+    }
+    
+>>>>>>> 2e99289055616f7091675884d76c17130fcb1f9d
     @PostMapping("/phone/add")
     public String phoneAdd(
     		@RequestParam("uno") long uno,
@@ -82,6 +94,7 @@ public class PhoneController {
         
         return "phone/comparison";
     }
+<<<<<<< HEAD
     
     // 휴대폰 상세 페이지 (상세 정보 + 리뷰 데이터 통합)
     @GetMapping("/PhoneDetail")
@@ -98,4 +111,6 @@ public class PhoneController {
 
         return "phone/PhoneDetail"; // PhoneDetail.jsp 반환
     }
+=======
+>>>>>>> 2e99289055616f7091675884d76c17130fcb1f9d
 }

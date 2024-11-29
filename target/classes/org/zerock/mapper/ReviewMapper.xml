@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
@@ -27,4 +28,25 @@
         VALUES (#{vno}, #{uno}, #{title}, #{content}, SYSDATE, SYSDATE)
     </insert>
 
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.ReviewMapper">
+
+    <insert id="insertReview" parameterType="org.zerock.domain.ReviewVO">
+        INSERT INTO REVIEW (RNO, VNO, UNO, TITLE, CONTENT, REGDATE, UPDATEDATE)
+        VALUES (SEQ_REVIEWS.NEXTVAL, #{vno}, #{uno}, #{title}, #{content}, SYSDATE, SYSDATE)
+    </insert>
+
+    <select id="getReviewById" parameterType="long" resultType="org.zerock.domain.ReviewVO">
+        SELECT * FROM REVIEW WHERE RNO = #{rno}
+    </select>
+
+    <select id="getAllReviews" resultType="org.zerock.domain.ReviewVO">
+        SELECT * FROM REVIEW ORDER BY REGDATE DESC
+    </select>
+>>>>>>> 2e99289055616f7091675884d76c17130fcb1f9d
 </mapper>

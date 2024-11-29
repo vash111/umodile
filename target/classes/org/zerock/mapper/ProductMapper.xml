@@ -35,6 +35,7 @@
             #{item}
         </foreach>
     </select>
+<<<<<<< HEAD
     
     <!-- 특정 휴대폰 상세 정보 가져오기 -->
     <select id="getPhoneDetails" resultType="org.zerock.domain.ProductVO">
@@ -46,5 +47,7 @@
         WHERE 
             cno = #{vno}
     </select>
+=======
+>>>>>>> 2e99289055616f7091675884d76c17130fcb1f9d
 	
 </mapper>

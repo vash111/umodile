@@ -14,6 +14,9 @@ public interface ProductService {
 	
 	// 선택된 두 상품 정보 가져오기
     List<ProductVO> getSelectedProducts(List<Long> cnoList);
+<<<<<<< HEAD
 
 	ProductVO getPhoneDetails(Long vno);
+=======
+>>>>>>> 2e99289055616f7091675884d76c17130fcb1f9d
 }
