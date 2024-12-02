@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
+Built-By: lese4
+=======
 Built-By: m18
+>>>>>>> 2e99289055616f7091675884d76c17130fcb1f9d
 Build-Jdk: 11.0.25
 Created-By: Maven Integration for Eclipse
 

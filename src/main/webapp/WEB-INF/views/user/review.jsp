@@ -23,7 +23,14 @@
              <form action="/review/create" method="post">
              
              <input type="hidden" name="vno" value="${vno}">
+<<<<<<< HEAD
              <input type="hidden" name="uno" value="${uno}">
+=======
+<<<<<<< HEAD
+             <input type="hidden" name="uno" value="${uno}">
+=======
+>>>>>>> 2e99289055616f7091675884d76c17130fcb1f9d
+>>>>>>> 99e6f925d48fc691c06b209e15af124923129af5
              <div id="divid" class="box-input">
                 <div class="input-wrap">
                    <input id="title" type="text" name="title" placeholder="리뷰 제목을 입력해주세요" class="input-default is-delete" title="title">

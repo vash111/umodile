@@ -39,6 +39,7 @@ public class PhoneController {
 		
     }
   
+<<<<<<< HEAD
 	// 휴대폰 상세 페이지 (상세 정보 + 리뷰 데이터 통합)
 	@GetMapping("/PhoneDetail")
 	public String phoneProductDetail(@RequestParam("cno") Long cno, Model model) {
@@ -48,7 +49,20 @@ public class PhoneController {
 	    model.addAttribute("reviews", reviews);
 	    return "phone/PhoneDetail";
 	}
+=======
+<<<<<<< HEAD
+=======
     
+    @GetMapping("/PhoneDetail") 
+    public void phoneProductDetail(@RequestParam("cno") Long cno, Model model) {
+        
+    	ProductVO product = productService.read(cno);
+    	
+    	model.addAttribute("product", product);
+    }
+>>>>>>> 99e6f925d48fc691c06b209e15af124923129af5
+    
+>>>>>>> 2e99289055616f7091675884d76c17130fcb1f9d
     @PostMapping("/phone/add")
     public String phoneAdd(
     		@RequestParam("uno") long uno,
@@ -93,5 +107,27 @@ public class PhoneController {
         
         return "phone/comparison";
     }
+<<<<<<< HEAD
     
+=======
+<<<<<<< HEAD
+    
+    // 휴대폰 상세 페이지 (상세 정보 + 리뷰 데이터 통합)
+    @GetMapping("/PhoneDetail")
+    public String phoneProductDetail(@RequestParam("cno") Long cno, Model model) {
+        // 상품 상세 정보 가져오기
+        ProductVO product = productService.read(cno);
+
+        // 리뷰 목록 가져오기
+        var reviews = reviewService.getReviewsByPhone(cno);
+
+        // 모델에 데이터 추가
+        model.addAttribute("product", product); // 상품 상세 정보
+        model.addAttribute("reviews", reviews); // 리뷰 데이터
+
+        return "phone/PhoneDetail"; // PhoneDetail.jsp 반환
+    }
+=======
+>>>>>>> 2e99289055616f7091675884d76c17130fcb1f9d
+>>>>>>> 99e6f925d48fc691c06b209e15af124923129af5
 }

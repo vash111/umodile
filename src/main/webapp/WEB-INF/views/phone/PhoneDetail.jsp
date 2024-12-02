@@ -390,6 +390,7 @@
 						</div>
 					</div>
 
+<<<<<<< HEAD
 <!-- 상품후기 섹션 -->
 <div class="tab-content" id="reviews" style="display: none;">
     <div class="review_list_wrap">
@@ -426,6 +427,58 @@
         </div>
     </div>
 </div>
+=======
+					<!-- 상품후기 섹션 -->
+					<div class="tab-content" id="reviews" style="display: none;">
+						<div class="review_list_wrap">
+							<div class="inner_list" id="gdasList">
+<<<<<<< HEAD
+								<c:forEach var="review" items="${reviews}">
+									<li>
+										<div class="infol">
+											<div class="user clrfix">
+												<p class="info_user">
+													<a class="id">${review.userName}</a> <!-- 가입신청한 유저 이름 -->
+												</p>
+											</div>
+										</div>
+										<div class="review_cont">
+											<div class="score_area">
+												<div class="review_title">
+													<span class="point">${review.title}</span> <!-- 리뷰 제목 -->
+												</div>
+												<span class="reg-date">${review.regdate}</span> <!-- 리뷰 작성일 -->
+											</div>
+											<p class="item_option">${phoneDetails.phone_Name}</p> <!-- 신청한 핸드폰 이름 -->
+											<div class="txt_inner">좋아요</div>
+										</div>
+									</li>
+								</c:forEach>
+=======
+								<li>
+									<div class="infol">
+										<div class="user clrfix">
+											<p class="info_user">
+												<a class="id">홍길동</a>
+											</p>
+										</div>
+									</div>
+									<div class="review_cont">
+										<div class="score_area">
+											<div class="review_title">
+												<span class="point">타이틀 수정</span>
+											</div>
+											<span class="reg-date">2024-11-11</span>
+										</div>
+										<p class="item_option">갤럭시 s24</p>
+										<div class="txt_inner">좋아요</div>
+									</div>
+								</li>
+>>>>>>> 2e99289055616f7091675884d76c17130fcb1f9d
+							</div>
+						</div>
+					</div>
+>>>>>>> 99e6f925d48fc691c06b209e15af124923129af5
 				</div>
 			</div>
 
