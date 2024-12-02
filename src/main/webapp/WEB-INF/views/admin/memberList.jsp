@@ -90,8 +90,8 @@
 						<div class="collapse" id="collapsePages"
 							aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="/admin/memberList">일반 유저</a> <a
-									class="nav-link" href="/admin/adminList">관리자 계정</a>
+								<a class="nav-link" href="/admin/memberList">회원 관리</a> <a
+									class="nav-link" href="/admin/adminList">관리자 관리</a>
 							</nav>
 
 						</div>
@@ -116,63 +116,40 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid px-4">
-					<h1 class="mt-4">고객 휴대폰 가입신청내역</h1>
-					<div class="card mb-4">
-						<div class="card-body">고객 휴대폰 가입신청 내역 페이지입니다.</div>
-					</div>
+					<h1 class="mt-4">회원관리</h1>
+					<div class="card mb-4"></div>
 					<div class="card mb-4">
 						<div class="card-header">
-							<i class="fas fa-table me-1"></i> 고객 핸드폰 신청 내역
+							<i class="fas fa-table me-1"></i> 회원관리
 						</div>
 						<div class="card-body">
+
 							<table id="datatablesSimple">
-
-
-								<c:if test="${empty orderLists}">
+								<thead>
 									<tr>
-										<td colspan="11">고객 휴대폰 가입 신청내역이 없습니다.</td>
+										<th>번호</th>
+										<th>아이디</th>
+										<th>성명</th>
+										<th>휴대폰번호</th>
+										<th>가입일자</th>
 									</tr>
-								</c:if>
-
-								<c:if test="${not empty orderLists}">
-									
-									<thead>
-										<tr>
-											<th>번호</th>
-											<th>아이디</th>
-											<th>성명</th>
-											<th>휴대폰번호</th>
-											<th>상품명</th>
-											<th>시리얼번호</th>
-											<th>판매가</th>
-											<th>색상</th>
-											<th>할부</th>
-											<th>결제금액</th>
-											<th>신청일자</th>
-										</tr>
-									</thead>
-									<tbody>
-									<c:set var="totalCount" value="${fn:length(orderLists)}" />
-									<c:forEach varStatus="status" items="${orderLists}"
-										var="orderList">
+								</thead>
+								<tbody>
+									<c:set var="totalCount" value="${fn:length(memberLists)}" />
+									<c:forEach varStatus="status" items="${memberLists}"
+										var="memberList">
 										<tr>
 											<td>${totalCount - status.index}</td>
-											<td>${orderList.email}</td>
-											<td>${orderList.name}</td>
-											<td>${orderList.phone}</td>
-											<td>${orderList.phone_Name}</td>
-											<td>${orderList.serial}</td>
-											<td>${orderList.price}</td>
-											<td>${orderList.color}</td>
-											<td>${orderList.installment}</td>
-											<td>${orderList.vatPriceFormatted}</td>
-											<td><fmt:formatDate value="${orderList.regDate}"
+											<td>${memberList.email}</td>
+											<td>${memberList.name}</td>
+											<td>${memberList.phone}</td>
+											<td><fmt:formatDate value="${memberList.regdate}"
 													pattern="yyyy-MM-dd" /></td>
 										</tr>
 									</c:forEach>
-								</c:if>
 								</tbody>
 							</table>
+
 						</div>
 					</div>
 				</div>
@@ -199,5 +176,17 @@
 		src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
 		crossorigin="anonymous"></script>
 	<script src="/resources/js/datatables-simple-demo.js"></script>
+	
+	<c:if test="${not empty message}">
+		<script type="text/javascript">
+			alert("${message}");
+		</script>
+	</c:if>
+
+	<c:if test="${not empty error}">
+		<script type="text/javascript">
+			alert("${error}");
+		</script>
+	</c:if>
 </body>
 </html>

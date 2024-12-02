@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.zerock.domain.OrderVO;
 import org.zerock.domain.ProductVO;
+import org.zerock.domain.ReviewVO;
 import org.zerock.service.NoticeService;
 import org.zerock.service.OrderService;
 import org.zerock.service.ProductService;
@@ -38,14 +39,15 @@ public class PhoneController {
 		
     }
   
-    
-    @GetMapping("/PhoneDetail") 
-    public void phoneProductDetail(@RequestParam("cno") Long cno, Model model) {
-        
-    	ProductVO product = productService.read(cno);
-    	
-    	model.addAttribute("product", product);
-    }
+	// 휴대폰 상세 페이지 (상세 정보 + 리뷰 데이터 통합)
+	@GetMapping("/PhoneDetail")
+	public String phoneProductDetail(@RequestParam("cno") Long cno, Model model) {
+	    ProductVO product = productService.read(cno);
+	    List<ReviewVO> reviews = reviewService.getReviewsByPhone(cno);
+	    model.addAttribute("product", product);
+	    model.addAttribute("reviews", reviews);
+	    return "phone/PhoneDetail";
+	}
     
     @PostMapping("/phone/add")
     public String phoneAdd(
@@ -91,4 +93,5 @@ public class PhoneController {
         
         return "phone/comparison";
     }
+    
 }

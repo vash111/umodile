@@ -182,13 +182,13 @@
                       <%-- <img src="${pageContext.request.contextPath}/resources/img/gkfdls.png" alt=""> --%>
                    </div>
                    <div class="phone-img">
-                      <img src="${pageContext.request.contextPath}/resources/phoneImg/${product.cno}.png">
+                      <img src="/upload/${product.image_Path}">
                    </div>
                    <div class="phone-cont">
                       <div class="phone-cont-top">
                          <h3 class="main-txt">
                            <span class="chip">
-                              <img src="${pageContext.request.contextPath}/resources/img/chip-lte.png"> 
+                               <img src="${pageContext.request.contextPath}/resources/img/chip-lte.png"> 
                            </span>
                         	${product.phone_Name}
                          </h3>
@@ -198,7 +198,7 @@
                       </div>
                         <div class="phone-cont-bottom">
                             <p class="normal-txt">
-                              월 납부금액
+                              판매가
                               <strong class="txt-vt">
                                 ${product.price}
                               </strong>
@@ -220,14 +220,9 @@
  
 
  
-<%-- <%@ include file="../includes/mainfooter.jsp"%> --%>
+<%@ include file="../includes/subfooter.jsp"%> 
 
-  	<!-- URL 파라미터로 전달된 loginMessage 확인 후 알림창 띄우기 -->
-	<c:if test="${param.msg == 'success'}">
-		<script>
-			alert('휴대폰 가입 신청이 완료되었습니다.');
-		</script>
-	</c:if>
+
 </body>
 </html>
 <script>

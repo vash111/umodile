@@ -610,9 +610,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
  
 /*  중간 슬라이드 */
- 
-
-/*  중간 슬라이드 */
 
 
 

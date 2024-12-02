@@ -13,7 +13,7 @@
 	<%@ include file="../includes/header.jsp"%>
 
 
-	<form method="post" action="/phone/add">
+		<form method="post" action="/phone/add">
 		<div class="sub-conts product-info">
 			<div class="box-phone-info">
 				<div class="phone-thumb">
@@ -22,8 +22,7 @@
 							<div class="slick-list draggable">
 								<div class="slick-track">
 									<div class="slick-slide">
-										<img
-											src="${pageContext.request.contextPath}/resources/phoneImg/${product.cno}.png">
+										 <img src="/upload/${product.image_Path}" />
 									</div>
 								</div>
 							</div>
@@ -33,8 +32,7 @@
 					<div class="thumb-slide slick-initialized slick-slider">
 						<div class="slick-list draggable">
 							<div class="slick-trackl">
-								<img
-									src="${pageContext.request.contextPath}/resources/phoneImg/${product.cno}.png">
+								 <img src="/upload/${product.image_Path}">
 							</div>
 						</div>
 					</div>
@@ -392,32 +390,42 @@
 						</div>
 					</div>
 
-					<!-- 상품후기 섹션 -->
-					<div class="tab-content" id="reviews" style="display: none;">
-						<div class="review_list_wrap">
-							<div class="inner_list" id="gdasList">
-								<li>
-									<div class="infol">
-										<div class="user clrfix">
-											<p class="info_user">
-												<a class="id">홍길동</a>
-											</p>
-										</div>
-									</div>
-									<div class="review_cont">
-										<div class="score_area">
-											<div class="review_title">
-												<span class="point">타이틀 수정</span>
-											</div>
-											<span class="reg-date">2024-11-11</span>
-										</div>
-										<p class="item_option">갤럭시 s24</p>
-										<div class="txt_inner">좋아요</div>
-									</div>
-								</li>
-							</div>
-						</div>
-					</div>
+<!-- 상품후기 섹션 -->
+<div class="tab-content" id="reviews" style="display: none;">
+    <div class="review_list_wrap">
+        <div class="inner_list" id="gdasList">
+            <c:forEach var="review" items="${reviews}">
+                <li>
+                    <!-- 사용자 정보 -->
+                    <div class="infol">
+                        <div class="user clrfix">
+                            <p class="info_user">
+                                <a class="id">${review.userName}</a> <!-- 가입신청한 유저 이름 -->
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 리뷰 내용 -->
+                    <div class="review_cont">
+                        <!-- 핸드폰 이름 -->
+                        <p class="item_option">상품명: ${review.phoneName}</p> <!-- 신청한 핸드폰 이름 -->
+
+                        <!-- 리뷰 제목 -->
+                        <div class="review_title">
+                            <span class="point">제목: ${review.title}</span> <!-- 리뷰 제목 -->
+                            <span>내용: ${review.content}</span> <!-- 리뷰 내용 -->
+                        </div>
+
+                        <!-- 리뷰 작성일 -->
+                        <div class="review_date">
+                            <span class="reg-date">작성일: ${review.regdate}</span> <!-- 리뷰 작성일 -->
+                        </div>
+                    </div>
+                </li>
+            </c:forEach>
+        </div>
+    </div>
+</div>
 				</div>
 			</div>
 
@@ -624,7 +632,7 @@ function checkLogin(event) {
     		// 색상 선택 했을 시 - 할부 선택 여부 체크
     		if(selectedMonth !== null){
                 // 선택된 값들이 모두 있을 때 폼을 제출
-                alert('휴대폰 가입 신청이 완료되었습니다.');
+                alert('휴대폰 가입 신청이 완료되었습니다.\n신청내역 페이지로 이동합니다.');
                 event.target.form.submit();
     		} else 
     			alert('할부 개월을 선택해주세요.')

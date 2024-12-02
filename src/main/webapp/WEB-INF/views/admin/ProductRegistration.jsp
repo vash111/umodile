@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,13 +27,7 @@
 		<!-- Navbar Search-->
 		<form
 			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-			<div class="input-group">
-				<input class="form-control" type="text" placeholder="Search for..."
-					aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
-					<i class="fas fa-search"></i>
-				</button>
-			</div>
+			<div class="input-group"></div>
 		</form>
 		<!-- Navbar-->
 		<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -89,11 +83,13 @@
 						</a>
 						<div class="collapse" id="collapsePages"
 							aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="/admin/memberList">일반 유저</a> <a
-									class="nav-link" href="/admin/adminList">관리자 계정</a>
+							<nav class="sb-sidenav-menu-nested nav accordion"
+								id="sidenavAccordionPages">
+								<nav class="sb-sidenav-menu-nested nav">
+									<a class="nav-link" href="/admin/memberList">일반 유저</a> <a
+										class="nav-link" href="/admin/adminList">관리자 계정</a>
+								</nav>
 							</nav>
-
 						</div>
 						<div class="sb-sidenav-menu-heading">Addons</div>
 						<a class="nav-link" href="/admin/PhoneApplicationdetails">
@@ -107,72 +103,76 @@
 						</a>
 					</div>
 				</div>
-				<div class="sb-sidenav-footer">
-					<div class="small">Logged in as:</div>
-					관리자 페이지
-				</div>
 			</nav>
 		</div>
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid px-4">
-					<h1 class="mt-4">고객 휴대폰 가입신청내역</h1>
+					<h1 class="mt-4">상품 관리</h1>
 					<div class="card mb-4">
-						<div class="card-body">고객 휴대폰 가입신청 내역 페이지입니다.</div>
+						<div class="card-body">상품등록 및 상품목록 조회 페이지입니다.</div>
 					</div>
 					<div class="card mb-4">
 						<div class="card-header">
-							<i class="fas fa-table me-1"></i> 고객 핸드폰 신청 내역
+							<i class="fas fa-table me-1"></i>휴대폰 상품 관리 페이지
 						</div>
 						<div class="card-body">
+
 							<table id="datatablesSimple">
 
-
-								<c:if test="${empty orderLists}">
+								<thead>
 									<tr>
-										<td colspan="11">고객 휴대폰 가입 신청내역이 없습니다.</td>
+										<th>번호</th>
+										<th>상품명</th>
+										<th>용량</th>
+										<th>용량</th>
+										<th>가격</th>
+										<th>사이즈</th>
+										<th>무게</th>
+										<th>카메라</th>
+										<th>배터리</th>
+										<th>메모리</th>
+										<th>디스플레이</th>
+										<th>상태</th>
+										<th>제조사</th>
+										<th>색상</th>
+										<th>CPU</th>
+										<th>출시일</th>
+										<th>기타(옵션)</th>
+										<th>운영체제</th>
+										<th>등록일자</th>
 									</tr>
-								</c:if>
-
-								<c:if test="${not empty orderLists}">
-									
-									<thead>
-										<tr>
-											<th>번호</th>
-											<th>아이디</th>
-											<th>성명</th>
-											<th>휴대폰번호</th>
-											<th>상품명</th>
-											<th>시리얼번호</th>
-											<th>판매가</th>
-											<th>색상</th>
-											<th>할부</th>
-											<th>결제금액</th>
-											<th>신청일자</th>
-										</tr>
-									</thead>
-									<tbody>
-									<c:set var="totalCount" value="${fn:length(orderLists)}" />
-									<c:forEach varStatus="status" items="${orderLists}"
-										var="orderList">
+								</thead>
+								<tbody>
+									<c:set var="totalCount" value="${fn:length(products)}" />
+									<c:forEach items="${products}" var="product" varStatus="status">
 										<tr>
 											<td>${totalCount - status.index}</td>
-											<td>${orderList.email}</td>
-											<td>${orderList.name}</td>
-											<td>${orderList.phone}</td>
-											<td>${orderList.phone_Name}</td>
-											<td>${orderList.serial}</td>
-											<td>${orderList.price}</td>
-											<td>${orderList.color}</td>
-											<td>${orderList.installment}</td>
-											<td>${orderList.vatPriceFormatted}</td>
-											<td><fmt:formatDate value="${orderList.regDate}"
+											<td><strong>${product.phone_Name}</strong></td>
+											<td>${product.serial}</td>
+											<td>${product.giga}</td>
+											<td>${product.price}</td>
+											<td>${product.phone_Size}</td>
+											<td>${product.phone_Weight}</td>
+											<td>${product.camera}</td>
+											<td>${product.battery}</td>
+											<td>${product.memory}</td>
+											<td>${product.display}</td>
+											<td>${product.status}</td>
+											<td>${product.manufacturer}</td>
+											<td>${product.color}</td>
+											<td>${product.cpu}</td>
+											<td><fmt:formatDate value="${product.release_Date}"
+													pattern="yyyy-MM-dd" /></td>
+											<td>${product.options}</td>
+											<td>${product.os}</td>
+											<td><fmt:formatDate value="${product.regdate}"
 													pattern="yyyy-MM-dd" /></td>
 										</tr>
 									</c:forEach>
-								</c:if>
 								</tbody>
 							</table>
+							<a href="/admin/registerProduct">상품등록</a>
 						</div>
 					</div>
 				</div>
@@ -182,10 +182,6 @@
 					<div
 						class="d-flex align-items-center justify-content-between small">
 						<div class="text-muted">Copyright &copy; Your Website 2023</div>
-						<div>
-							<a href="#">Privacy Policy</a> &middot; <a href="#">Terms
-								&amp; Conditions</a>
-						</div>
 					</div>
 				</div>
 			</footer>

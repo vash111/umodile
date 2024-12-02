@@ -41,7 +41,10 @@ public class ProductServiceImpl implements ProductService {
 	    return mapper.getSelectedProducts(cnoList);
 	 }
 	
-	
+	 @Override
+	 public ProductVO getPhoneDetails(Long vno) {
+	     return mapper.getPhoneDetails(vno);
+	 }
 	
 
 }

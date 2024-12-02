@@ -68,22 +68,21 @@ public class UserController {
 	// 유저 공지 리스트
 	@GetMapping("/notice")
 	public String userNotice(
-	        @RequestParam(defaultValue = "1") int page, // 기본값 1페이지
+	        @RequestParam(defaultValue = "1") int page, // 페이지 기본값
 	        Model model) {
 	    int limit = 10; // 한 페이지에 보여줄 게시물 수
-	    int offset = (page - 1) * limit; // 시작점 계산
+	    int offset = (page - 1) * limit;
 
-	    // 공지사항 목록 가져오기
 	    List<NoticeVO> noticeList = noticeService.getAllWithPaging(offset, limit);
-	    // 전체 공지사항 개수 가져오기
+
 	    int totalResults = noticeService.countAllPosts();
-	    // 전체 페이지 계산
+
 	    int totalPages = (int) Math.ceil((double) totalResults / limit);
 
 	    // 모델에 데이터 추가
-	    model.addAttribute("noticeList", noticeList); // 공지사항 목록
-	    model.addAttribute("currentPage", page); // 현재 페이지
-	    model.addAttribute("totalPages", totalPages); // 전체 페이지 수
+	    model.addAttribute("noticeList", noticeList);
+	    model.addAttribute("currentPage", page);
+	    model.addAttribute("totalPages", totalPages);
 
 	    return "user/notice";
 	}
@@ -93,20 +92,18 @@ public class UserController {
 	public String search(@RequestParam("keyword") String keyword,
 	                     @RequestParam(defaultValue = "1") int page,
 	                     Model model) {
-	    int limit = 10; // 한 페이지에 표시할 공지사항 수
-	    int offset = (page - 1) * limit; // 시작 데이터
+	    int limit = 10;
+	    int offset = (page - 1) * limit;
 
-	    // 검색된 공지사항 목록 가져오기
 	    List<NoticeVO> searchResults = noticeService.searchPosts(keyword, offset, limit);
 
-	    // 총 검색 결과 개수 가져오기
 	    int totalResults = noticeService.countSearchPosts(keyword);
-	    int totalPages = (int) Math.ceil((double) totalResults / limit); // 총 페이지 수 계산
+	    int totalPages = (int) Math.ceil((double) totalResults / limit);
 
-	    model.addAttribute("noticeList", searchResults); // 검색 결과
-	    model.addAttribute("currentPage", page); // 현재 페이지
-	    model.addAttribute("totalPages", totalPages); // 전체 페이지 수
-	    model.addAttribute("keyword", keyword); // 검색어 유지
+	    model.addAttribute("noticeList", searchResults);
+	    model.addAttribute("currentPage", page);
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("keyword", keyword);
 
 	    return "user/notice";
 	}
@@ -261,28 +258,7 @@ public class UserController {
 		return "user/review";
 	}
 	
-	@PostMapping("/reviews/create")
-	public String createReview(@RequestParam(required = false) Long uno,
-	                           @RequestParam(required = false) Long vno,
-	                           @RequestParam String title,
-	                           @RequestParam String content,
-	                           Model model) {
-	    if (uno == null || vno == null) {
-	        model.addAttribute("error", "사용자 정보 또는 제품 번호가 누락되었습니다.");
-	        return "error";
-	    }
 
-	    // 리뷰 생성
-	    ReviewVO review = new ReviewVO();
-	    review.setUno(uno);
-	    review.setVno(vno);
-	    review.setTitle(title);
-	    review.setContent(content);
-
-	    reviewService.create(review);
-	    model.addAttribute("message", "리뷰가 성공적으로 저장되었습니다.");
-	    return "redirect:/user/review";
-	}
 
 
 	

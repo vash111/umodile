@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,9 @@
                 <h2 class="main-txt">리뷰 를 작성해주세요</h2>
              </div>
              <form action="/review/create" method="post">
+             
              <input type="hidden" name="vno" value="${vno}">
+             <input type="hidden" name="uno" value="${uno}">
              <div id="divid" class="box-input">
                 <div class="input-wrap">
                    <input id="title" type="text" name="title" placeholder="리뷰 제목을 입력해주세요" class="input-default is-delete" title="title">

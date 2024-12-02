@@ -23,10 +23,11 @@ public class AdminListController {
 		this.noticeService = noticeService;
 	}
 	
+	// 10개 공지사항 가져오기
 	@GetMapping("/notice")
 	public String noticList(Model model) {
-	    List<NoticeVO> noticeList = noticeService.getAllWithPaging(0, 10); // 첫 10개 공지사항 가져오기
-	    model.addAttribute("noticeAllList", noticeList); // noticeAllList 이름으로 모델에 추가
+	    List<NoticeVO> noticeList = noticeService.getAllWithPaging(0, 10); 
+	    model.addAttribute("noticeAllList", noticeList);
 	    return "admin/notice";
 	}
     
@@ -45,8 +46,6 @@ public class AdminListController {
     public String noticRead() {
         return "admin/read";  
     }
-    
-    
     
 	// 관리자 페이지 에서 고객이 핸드폰 신청한 내역 만 볼수 있다. 
 	  @GetMapping("/PhoneApplicationdetails") 

@@ -25,11 +25,11 @@ public class NoticeController {
     public String list(@RequestParam(defaultValue = "0") int page, Model model) {
         int limit = 10; // 한 페이지당 표시할 항목 수
         int offset = page * limit;
-        List<NoticeVO> notices = service.getAllWithPaging(offset,limit); // 공지사항 데이터 가져오기
+        List<NoticeVO> notices = service.getAllWithPaging(offset,limit);
         
-        model.addAttribute("noticeList", notices); // 데이터 전달
-        model.addAttribute("currentPage", page); // 현재 페이지 전달
-        return "noticeList"; // JSP 파일 이름
+        model.addAttribute("noticeList", notices);
+        model.addAttribute("currentPage", page);
+        return "noticeList";
     }
     
     // 공지사항 검색
@@ -44,14 +44,14 @@ public class NoticeController {
         model.addAttribute("notices", searchResults);
         model.addAttribute("currentPage", page);
         model.addAttribute("keyword", keyword);
-        return "notice/list"; // 검색 결과도 목록에 반영
+        return "notice/list";
     }
     
     // 공지사항 등록 페이지
     @GetMapping("/create")
     public String createForm(Model model) {
-        model.addAttribute("notice", new NoticeVO()); // 빈 객체 전달
-        return "admin/create"; // 등록 폼 JSP로 이동
+        model.addAttribute("notice", new NoticeVO());
+        return "admin/create";
     }
 
     // 공지사항 작성 처리
